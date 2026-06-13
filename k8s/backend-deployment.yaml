@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: backend
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: backend
+
+  template:
+    metadata:
+      labels:
+        app: backend
+
+    spec:
+      containers:
+      - name: backend
+
+        image: 348452969126.dkr.ecr.us-east-1.amazonaws.com/cloudshop-backend:healthfix
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+
+        env:
+        - name: DB_HOST
+          value: cloudshop-db.c4pws660c847.us-east-1.rds.amazonaws.com
+
+        - name: DB_USER
+          value: admin
+
+        - name: DB_PASSWORD
+          value: Anabelanb2024
+
+        - name: DB_NAME
+          value: cloudshopDB

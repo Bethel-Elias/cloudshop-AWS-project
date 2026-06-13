@@ -6,6 +6,8 @@ const productRoutes = require('./routes/productRoutes');
 
 const cartRoutes = require("./routes/cartRoutes");
 
+const recommendationsRoutes = require("./routes/recommendations");
+
 dotenv.config();
 
 const app = express();
@@ -13,9 +15,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+
+
 app.use('/api/products', productRoutes);
 
 app.use("/api/cart", cartRoutes);
+
+app.use("/api/recommendations", recommendationsRoutes);
+
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 
 const PORT = process.env.PORT || 5000;
 
